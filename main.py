@@ -137,15 +137,13 @@ def main():
 		global h_movement
 		global v_movement
 		if symbol == key.UP:
-			v_movement = fast_movement
-		elif symbol == key.DOWN:
 			v_movement = -fast_movement
+		elif symbol == key.DOWN:
+			v_movement = fast_movement
 		elif symbol == key.LEFT:
-			h_movement = -fast_movement
-		elif symbol == key.RIGHT:
 			h_movement = fast_movement
-		elif symbol == key.ESCAPE:
-			window.close()
+		elif symbol == key.RIGHT:
+			h_movement = -fast_movement
 
 	
 	@window.event
