@@ -1,4 +1,6 @@
 import pyglet
+from pyglet.window import key
+
 """
 	moving right == subtract one from x
 	as you move right, everything else moves left
@@ -84,10 +86,10 @@ def main():
 	def on_draw():
 		window.clear()
 		
-		print(f"h_movement: {h_movement} v_movement: {v_movement}")
-		print(f"current_x: {current_x} current_y: {current_y}")
-		print(f"lbl_title.x: {lbl_title.x} lbl_title.y: {lbl_title.y}")
-		print(f"title height: {lbl_title.content_height} title width: {lbl_title.content_width}")
+		# print(f"h_movement: {h_movement} v_movement: {v_movement}")
+		# print(f"current_x: {current_x} current_y: {current_y}")
+		# print(f"lbl_title.x: {lbl_title.x} lbl_title.y: {lbl_title.y}")
+		# print(f"title height: {lbl_title.content_height} title width: {lbl_title.content_width}")
 
 		if not moving_past_horizontal_edge(lbl_title.x, h_movement):
 			lbl_title.x += h_movement
@@ -128,6 +130,39 @@ def main():
 		h_movement = 0
 		global v_movement
 		v_movement = 0
+	
+	@window.event
+	def on_key_press(symbol, modifiers):
+		print(f"on_key_press: {symbol} {modifiers}")
+		global h_movement
+		global v_movement
+		if symbol == key.UP:
+			v_movement = -fast_movement
+		elif symbol == key.DOWN:
+			v_movement = fast_movement
+		elif symbol == key.LEFT:
+			h_movement = fast_movement
+		elif symbol == key.RIGHT:
+			h_movement = -fast_movement
+		elif symbol == key.ESCAPE:
+			window.close()
+
+	
+	@window.event
+	def on_key_release(symbol, modifiers):
+		print(f"on_key_release: {symbol} {modifiers}")
+		
+		global h_movement
+		global v_movement
+		if symbol == key.UP:
+			v_movement = 0
+		elif symbol == key.DOWN:
+			v_movement = 0
+		elif symbol == key.LEFT:
+			h_movement = 0
+		elif symbol == key.RIGHT:
+			h_movement = 0
+
 
 	pyglet.app.run()
 
